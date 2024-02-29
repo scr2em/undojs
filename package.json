@@ -1,0 +1,58 @@
+{
+  "name": "undojs",
+  "version": "1.0.22",
+  "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "watch": "tsup --watch",
+    "build": "tsup",
+    "test": "vitest",
+    "prepublish": "tsup"
+  },
+  "keywords": [
+    "undo",
+    "redo",
+    "history",
+    "transactions"
+  ],
+  "author": "Mohamed Abdelgwad",
+  "files": [
+    "dist"
+  ],
+  "license": "ISC",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "require": "./dist/react/index.cjs",
+      "import": "./dist/react/index.mjs",
+      "default": "./dist/react/index.js"
+    },
+    "./zustand": {
+      "types": "./dist/zustand/index.d.ts",
+      "require": "./dist/zustand/index.cjs",
+      "import": "./dist/zustand/index.mjs",
+      "default": "./dist/zustand/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "immer": "^10.0.3",
+    "nanoid": "^5.0.6",
+    "react": "18.2.0",
+    "zustand": "^4.5.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3",
+    "vitest": "^1.3.1"
+  }
+}
