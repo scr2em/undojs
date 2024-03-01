@@ -1,6 +1,6 @@
 {
   "name": "undojs",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -19,7 +19,9 @@
   ],
   "author": "Mohamed Abdelgwad",
   "files": [
-    "dist"
+    "dist",
+    "react",
+    "zustand"
   ],
   "license": "ISC",
   "exports": {
