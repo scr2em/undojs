@@ -7,7 +7,7 @@ export type TransactionsStoreObserverCallback = ({ canUndo, canRedo }: { canUndo
  */
 export type ValueContainer<T> = {
   get(): T;
-  set(value: T): void;
+  set(value: T | ((prevState: T) => T)): void;
 };
 export type UnwrapContainers<Containers extends ValueContainer<unknown>[]> = {
   [Index in keyof Containers]: Containers[Index] extends { get: () => infer Value } ? Value : never;
@@ -23,6 +23,6 @@ export type StoreObserver<T> = (state: T, prevState: T) => void;
 
 export type Store<T> = {
   get(): T;
-  set(newValue: T): void;
+  set(newValue: T | ((prevState: T) => T)): void;
   subscribe(listener: StoreObserver<T>): () => void;
 };

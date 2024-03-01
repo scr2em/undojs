@@ -9,6 +9,7 @@
     "watch": "tsup --watch",
     "build": "tsup",
     "test": "vitest",
+    "test:ui": "vitest --ui --coverage",
     "prepublish": "tsup"
   },
   "keywords": [
@@ -52,6 +53,8 @@
     "zustand": "^4.5.1"
   },
   "devDependencies": {
+    "@vitest/coverage-istanbul": "1.3.1",
+    "@vitest/ui": "1.3.1",
     "prettier": "^3.2.5",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3",

@@ -9,7 +9,13 @@ export function createStore<T>(state: T): Store<T> {
     set: (newValue) => {
       const prevState = state;
 
-      state = newValue;
+      if (typeof newValue === "function") {
+        // TODO
+        // @ts-expect-error
+        state = newValue(prevState);
+      } else {
+        state = newValue;
+      }
 
       subs.forEach((listener) => {
         listener(state, prevState);

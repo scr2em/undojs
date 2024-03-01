@@ -3,10 +3,10 @@ import { ValueContainer } from "../types";
 
 export function storeToValueContainer<T>(store: StoreApi<T>): ValueContainer<T> {
   return {
-    get: (): T => {
+    get: () => {
       return store.getState();
     },
-    set: (value: T) => {
+    set: (value) => {
       return store.setState(value);
     },
   };

@@ -76,6 +76,18 @@ describe("TransactionsManager", () => {
       expect(manager.currentStack).toEqual([]);
     });
 
+    it("it does nothing when calling undo and history is empty", () => {
+      manager.undo();
+      expect(manager.currentStack).toEqual([]);
+      expect(manager.undoneStack).toEqual([]);
+    });
+
+    it("it does nothing when calling redo and history is empty", () => {
+      manager.redo();
+      expect(manager.currentStack).toEqual([]);
+      expect(manager.undoneStack).toEqual([]);
+    });
+
     it("adds a transaction and applies patches and empty the undone stack", () => {
       const mockContainer = new MockValueContainer({});
       const patches: Patch[] = [{ op: "add", path: ["test"], value: "value" }];
@@ -107,8 +119,7 @@ describe("TransactionsManager", () => {
     expect(mockContainer.get()).toEqual(initialState);
   });
   it(".redo - it redo the last undone transaction", () => {
-    const initialState = {};
-    const mockContainer = new MockValueContainer(initialState);
+    const mockContainer = new MockValueContainer({});
     const transaction = new Transaction();
     const patches: Patch[] = [{ op: "add", path: ["test"], value: "value" }];
     const reversePatches: Patch[] = [{ op: "remove", path: ["test"] }];
@@ -242,8 +253,7 @@ describe("TransactionsManager", () => {
   });
 
   it("shouldn't be able to undo or redo after clear", () => {
-    const initialState = {};
-    const mockContainer = new MockValueContainer(initialState);
+    const mockContainer = new MockValueContainer({});
     const transaction = new Transaction();
     const patches: Patch[] = [{ op: "add", path: ["age"], value: "30" }];
     const reversePatches: Patch[] = [{ op: "remove", path: ["age"] }];
