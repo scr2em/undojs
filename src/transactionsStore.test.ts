@@ -1,6 +1,7 @@
 import { TransactionsStore } from "./transactionsStore";
 import { beforeEach, describe, expect, it } from "vitest";
-import { createStore, Store } from "./createStore";
+import { createStore } from "./createStore";
+import { Store } from "./types";
 
 describe("Transaction Store: ", () => {
   let transactionStore: TransactionsStore;
@@ -230,8 +231,7 @@ describe("Transaction Store: ", () => {
   });
 
   it("should reset the checkpoint after commiting", () => {
-    const initalState = { x: 0, y: 0 };
-    const coords = createStore<{ x: number; y: number }>(initalState);
+    const coords = createStore<{ x: number; y: number }>({ x: 0, y: 0 });
     const transactionStore = new TransactionsStore();
 
     transactionStore.createTransaction(
@@ -277,8 +277,7 @@ describe("Transaction Store: ", () => {
   });
 
   it("discards ehphermal updates if first update is ephemral", () => {
-    const initalState = { x: 0, y: 0 };
-    const coords = createStore<{ x: number; y: number }>(initalState);
+    const coords = createStore<{ x: number; y: number }>({ x: 0, y: 0 });
     const transactionStore = new TransactionsStore();
 
     transactionStore.createTransaction(
@@ -303,8 +302,7 @@ describe("Transaction Store: ", () => {
   });
 
   it("discards ehphermal updates if first update is not ephemeral", () => {
-    const initalState = { x: 0, y: 0 };
-    const coords = createStore<{ x: number; y: number }>(initalState);
+    const coords = createStore<{ x: number; y: number }>({ x: 0, y: 0 });
     const transactionStore = new TransactionsStore();
 
     transactionStore.createTransaction([coords], (coords) => {

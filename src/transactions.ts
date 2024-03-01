@@ -1,19 +1,8 @@
-import { applyPatches, type Patch } from "immer";
+import { applyPatches, enablePatches } from "immer";
 import { nanoid } from "nanoid";
+import { TransactionChange } from "./types";
 
-/*
- this is basically to convert any state management's primitive to a simple object that has a get and a set
- */
-export type ValueContainer<T> = {
-  get(): T;
-  set(value: T): void;
-};
-
-export type TransactionChange = {
-  patches: Patch[];
-  reversePatches: Patch[];
-  container: ValueContainer<Record<string, unknown>>;
-};
+enablePatches();
 
 export class Transaction {
   readonly id: string = nanoid();

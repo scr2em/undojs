@@ -1,32 +1,9 @@
-import { Transaction, TransactionsManager, ValueContainer } from "./transactions";
+import { Transaction, TransactionsManager } from "./transactions";
 import { createDraft, enablePatches, finishDraft, type Patch } from "immer";
+import { TransactionsStoreObserverCallback, UnwrapContainers, ValueContainer } from "./types";
 
 enablePatches();
 
-type UnwrapContainers<Containers extends ValueContainer<unknown>[]> = {
-  [Index in keyof Containers]: Containers[Index] extends { get: () => infer Value } ? Value : never;
-};
-
-type TransactionsStoreObserverCallback = ({ canUndo, canRedo }: { canUndo: boolean; canRedo: boolean }) => void;
-
-/**
- * This module handles the implementation of builder actions and their tracking for undo/redo functionality.
- *
- * Considerations:
- *  1. Builder actions are categorized into:
- *     a. Trackable actions: Actions that need to be tracked for undo/redo functionality. Some actions
- *        may be triggered programmatically and don't require tracking.
- *     b. Un-trackable actions: Actions that are not tracked for undo/redo functionality.
- *
- *  2. Composite actions: Actions may consist of multiple sub-actions. For instance, deleting a
- *     selected element involves:
- *        a. Deleting the element.
- *        b. Setting the selected element to null.
- *     Undoing this action requires reversing all sub-actions as a group.
- *
- *  3. Transactional actions: Actions should be executed as part of a transaction, allowing them to be
- *     undone or redone as a whole.
- */
 export class TransactionsStore {
   readonly transactionManager = new TransactionsManager();
 
